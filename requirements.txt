@@ -1,3 +1,6 @@
-Flask
-flask-script
-pytest
+flask==0.12.2
+flask-script==2.0.6
+flask-restful==0.3.6
+flask-jwt-extended==3.7.2
+passlib==1.7.1
+flask-sqlalchemy==2.3.2
