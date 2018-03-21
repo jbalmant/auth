@@ -3,11 +3,15 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Temp files
+*.db
+
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
+.idea/
 env/
 build/
 develop-eggs/

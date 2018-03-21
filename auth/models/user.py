@@ -12,6 +12,13 @@ class User(BaseModel):
     username = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
+    def api_representation(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'password': self.password
+        }
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
