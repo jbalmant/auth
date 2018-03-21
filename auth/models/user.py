@@ -3,6 +3,7 @@
 
 from auth.app import db
 from auth.models import BaseModel
+from passlib.hash import pbkdf2_sha256 as sha256
 
 
 class User(BaseModel):
@@ -22,3 +23,11 @@ class User(BaseModel):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+    @staticmethod
+    def generate_hash(password):
+        return sha256.hash(password)
+
+    @staticmethod
+    def verify_hash(password, hash):
+        return sha256.verify(password, hash)

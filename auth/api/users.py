@@ -26,7 +26,7 @@ def registration():
     data = parser.parse_args()
     new_user = User(
         username=data['username'],
-        password=data['password']
+        password=User.generate_hash(data['password'])
     )
 
     try:
@@ -40,4 +40,11 @@ def registration():
 @users_blueprint.route('/login', methods=['POST'])
 def login():
     data = parser.parse_args()
-    return json.dumps('{logged}')
+    current_user = User.query.filter_by(username=data['username']).first()
+    if not current_user:
+        return json.dumps('{{message: User {} does not exist.}}'.format(data['username']))
+
+    if User.verify_hash(data['password'], current_user.password):
+        return json.dumps('{{message: Logged in as {}.}}'.format(current_user.username))
+
+    return json.dumps('{message: Wrong credentials.}')

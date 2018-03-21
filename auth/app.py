@@ -4,7 +4,6 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_restful import Api
 
 db = SQLAlchemy()
 
@@ -22,8 +21,6 @@ def create_app():
         print('Running in debug mode')
     else:
         print('NOT running in debug mode')
-
-    api = Api(app)
 
     @app.before_first_request
     def create_tables():
